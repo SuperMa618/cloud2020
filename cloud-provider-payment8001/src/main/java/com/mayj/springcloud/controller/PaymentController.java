@@ -29,6 +29,7 @@ public class PaymentController {
     @Value("${server.port}")
     private String serverPort;
 
+    //如果服务使用consul或者zk使用这个
     @Resource
     private DiscoveryClient discoveryClient;
 
@@ -65,5 +66,10 @@ public class PaymentController {
         } else {
             return new CommonResult(301, "查询失败",null);
         }
+    }
+
+    @GetMapping("lb")
+    public String getPaymentLB() {
+        return serverPort;
     }
 }
